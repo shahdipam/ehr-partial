@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1 class="mt-4">Files</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Upload a file:
+        <input type="file" name="document"></p>
+        <button type="submit" class="navbar-toggler bg_light" onClick="window.location.reload();" style="background-color:#007bff; padding: 7px 12px; color:white;">Upload file</button>
+    </form>
+
+    <div id="some_flag" title="Some Flag">
+{% if some_flag == 0 %}
+        <p>Please upload an image file in jpeg/jpg only</p>
+{% elif some_flag == 1%}
+        <p>Uploaded</p>
+{% elif some_flag == 1%}
+        <p>No file selected</p>
+
+{% endif %}
+    </div>
+
+<h1 class="mt-4">Your files</h1>
+
+{% for i in hashes %}
+    <a href="http://localhost:8080/ipfs/{{i}}" target="_blank">{{i}}</a>
+<br>
+{% endfor %}
+
+{% endblock %}
