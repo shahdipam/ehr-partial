@@ -16,27 +16,19 @@ def index(request):
 
 @csrf_exempt
 def files(request):
-    # print(blockchain.contract.functions.get_hashes().transact({'from': blockchain.w3.eth.accounts[1]}))
-
-    input = open('hashes.txt','r').read().split('\n')
-    input.pop()
-    print(input)
-    filehashes = set(input)
+    print("HASHES:"+ str(blockchain.contract.functions.get_hashes().call()))
 
     if request.method == 'POST':
         file = request.FILES['document']
-        fs = FileSystemStorage()
         if file.name.endswith('.jpeg') or file.name.endswith('.jpg'):
 
-            res = blockchain.uploadIpfs(file)
-            print(res)
-            return render(request, 'files.html', {'hashes': filehashes, 'some_flag': 1})
+            blockchain.uploadIpfs(file)
+            return render(request, 'files.html', {'hashes': blockchain.contract.functions.get_hashes().call(), 'some_flag': 1})
         else:
-            return render(request, 'files.html', {'hashes': filehashes, 'some_flag': 0})
+            return render(request, 'files.html', {'hashes': blockchain.contract.functions.get_hashes().call(), 'some_flag': 0})
 
 
-        # fs.save(file.name, file)
-    return render(request, 'files.html', {'hashes': filehashes, 'some_flag': -1})
+    return render(request, 'files.html', {'hashes': blockchain.contract.functions.get_hashes().call(), 'some_flag': -1})
 
 
 def book(request):
