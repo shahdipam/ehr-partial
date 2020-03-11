@@ -1,6 +1,11 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1 class="mt-4">Book Appointment</h1>
-    <p>book appointment</p>
-{% endblock %}
+<h1 class="mt-4">Add a doctor</h1>
+    <p>Add a doctor and grant access to all your files </p>
+<form method="post">
+    {% csrf_token %}
+    <input placeholder="Enter doctors name" name="doc">
+    <button type="submit" class="navbar-toggler bg_light" style="background-color:#007bff; padding: 4px 12px; color:white;" name="add">Add</button>
+</form>
+    {% endblock %}

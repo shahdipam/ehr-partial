@@ -2,5 +2,10 @@
 
 {% block content %}
 <h1 class="mt-4">Dashboard</h1>
-    <p>Dashboard</p>
+    <p>Show all doctors and appointments</p>
+
+    {%for user in all_users%}
+    <p>{{ user }}</p>
+    {% endfor%}
+
 {% endblock %}
